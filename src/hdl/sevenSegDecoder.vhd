@@ -31,13 +31,22 @@ use IEEE.STD_LOGIC_1164.ALL;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
+   
 entity sevenSegDecoder is
     Port ( i_D : in STD_LOGIC_VECTOR (3 downto 0);
            o_S : out STD_LOGIC_VECTOR (6 downto 0));
 end sevenSegDecoder;
 
 architecture Behavioral of sevenSegDecoder is
-   
+
+signal c_Sa : std_logic;
+signal c_Sb : std_logic;
+signal c_Sc : std_logic;
+signal c_Sd : std_logic;
+signal c_Se : std_logic;
+signal c_Sf : std_logic;
+signal c_Sg : std_logic;
+
 begin
     o_S(0) <= c_Sa;
     o_S(1) <= c_Sb;
@@ -52,12 +61,27 @@ begin
         or (i_D(0) and not i_D(3) and not i_D(2) and not i_D(1))
         or (i_D(3) and not i_D(2) and i_D(1) and i_D(0));
         
-   c_Sb <= (i_D(3) and i_D(1) and i_D(0))
-        or (i_D(3) and not i_D(2)  and i_D(1))
-        or (i_D(2)  and not i_D(3) and not i_D(1) and i_D(0))
-        or (i_D(2)  and not i_D(3) and i_D(1) and not i_D(0))
-        or (i_D(3) and not i_D(2) and not i_D(1));
-        
+ --  c_Sb <= (i_D(3) and i_D(1) and i_D(0))
+   --     or (i_D(3) and not i_D(2)  and i_D(1))
+     --   or (i_D(2)  and not i_D(3) and not i_D(1) and i_D(0))
+       -- or (i_D(2)  and not i_D(3) and i_D(1) and not i_D(0))
+       -- or (i_D(3) and not i_D(2) and not i_D(0));
+       
+       --5 6 B C E F
+   c_Sb <= '1' when ( (i_D = x"5") or
+                       (i_D = x"6") or
+                       (i_D = x"B") or
+                       (i_D = x"C") or
+                       (i_D = x"E") or
+                       (i_D = x"F"))else '0';
+   
+   
+   
+   
+   
+   
+   
+       
    c_Sc <= (i_D(3) and i_D(2) and i_D(1))
         or (i_D(1) and not i_D(3) and not i_D(2) and not i_D(0))
         or (i_D(3) and i_D(2) and not i_D(1) and not i_D(0));
@@ -67,9 +91,21 @@ begin
         or (i_D(2) and not i_D(3) and not i_D(1) and not i_D(0))
         or (i_D(3) and not i_D(2) and i_D(1) and not i_D(0));
 
-   c_Se <= (i_D(1) and not i_D(3) and i_D(0))
-        or (i_D(2) and not i_D(3) and not i_D(0))
-        or (i_D(3) and not i_D(2) and not i_D(1) and i_D(0));
+  -- c_Se <= (i_D(1) and not i_D(3) and i_D(0))
+   --     or (i_D(2) and not i_D(3) and not i_D(1))
+   --     or (i_D(3) and not i_D(2) and not i_D(1) and i_D(0));
+   -- on when 0 2 6 8 A B C D E F
+   c_Se <= '0' when ( (i_D = x"0") or
+                      (i_D = x"2") or
+                      (i_D = x"6") or
+                      (i_D = x"8") or
+                     (i_D = x"A") or
+                     (i_D = x"B") or
+                     (i_D = x"C") or
+                    (i_D = x"D") or
+                    (i_D = x"E") or
+                    (i_D = x"F")) else '1';
+                     
    
    c_Sf <= (i_D(0) and not i_D(3) and not i_D(2))
         or (i_D(1) and not i_D(3) and not i_D(2))

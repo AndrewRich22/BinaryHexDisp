@@ -106,7 +106,7 @@ begin
 		w_sw <= x"A"; wait for 10 ns;
                      assert w_seg = "0001000" report "error on xA" severity failure;
 		w_sw <= x"B"; wait for 10 ns;
-                     assert w_seg = "0100111" report "error on xB" severity failure;
+                     assert w_seg = "0000011" report "error on xB" severity failure;
 		w_sw <= x"C"; wait for 10 ns;
                     assert w_seg = "0100111" report "error on xC" severity failure;
 		w_sw <= x"D"; wait for 10 ns;                           

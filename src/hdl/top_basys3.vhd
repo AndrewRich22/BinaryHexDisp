@@ -89,7 +89,12 @@ architecture top_basys3_arch of top_basys3 is
 signal w_7SD_EN_n : std_logic;
 begin
 	-- PORT MAPS ----------------------------------------
-
+sevenSegDecoder_inst : sevenSegDecoder port map (
+          -- use comma (not a semicolon)
+          -- no comma on last line
+          i_D => sw,
+          o_S => seg
+        );
 	--	Port map: wire your component up to the switches and seven-segment display cathodes
 	-----------------------------------------------------	
 	an <= (0 => w_7SD_EN_n, others => '1');
